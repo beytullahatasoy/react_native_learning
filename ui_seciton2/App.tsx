@@ -1,12 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
-import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Image, ImageBackground, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
+  const [text, setText] = useState("");
+
   return ( <ImageBackground 
-  source={require('./assets/indir.jpg')} 
+  source={require('./assets/indir2.jpg')} 
   style={styles.container}>
 
-    <Text style={styles.text}>Deneme</Text>
+  <TextInput style={styles.input}  
+    placeholder="Enter text here" 
+    keyboardType='numeric' 
+    secureTextEntry multiline={false} 
+    value={text}
+    onChangeText={(text) => setText(text)}
+  />
+
+    <Text style={styles.text}>Yazılan değer: {text}</Text>
   </ImageBackground>
   );
 }
@@ -22,5 +33,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     padding: 20,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    backgroundColor: 'white',
+    paddingHorizontal: 10,
+    width: '80%',
+    borderRadius: 5,
   },
 });
