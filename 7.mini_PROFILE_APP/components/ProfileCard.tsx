@@ -14,7 +14,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ onEdit }) => {
         source={{ uri: "https://randomuser.me/img/creator_arron.png" }}
       />
 
-      <Text style={styles.name}>Beytullah</Text>
+      <Text style={styles.name}>Beytullah Atasoy</Text>
       <Text style={styles.desc}>React Native Developer</Text>
 
       <Pressable style={styles.button} onPress={onEdit}>
@@ -29,7 +29,7 @@ export default ProfileCard;
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: "#e0e0e0",
     borderRadius: 16,
     padding: 20,
     alignItems: "center",
