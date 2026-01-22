@@ -12,7 +12,7 @@ export default function App() {
       >
         <Text style={styles.title}>Mini Profile App</Text>
 
-        <ProfileCard />
+        <ProfileCard onEdit={() => {}} />
       </ImageBackground>
     </SafeAreaView>
   );
@@ -23,19 +23,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
   },
   bg: {
     flex: 1,
     padding: s(58),
-    justifyContent: "center",
-    alignItems: "center",
   },
   title: {
     fontSize: s(32),
     fontWeight: "bold",
     color: "#ffffff",
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
