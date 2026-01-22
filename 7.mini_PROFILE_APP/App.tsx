@@ -2,6 +2,7 @@ import { Image, ImageBackground, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { s } from "react-native-size-matters";
 import ProfileCard from "./components/ProfileCard";
+import Favorites from "./components/Favorites";
 
 export default function App() {
   return (
@@ -12,7 +13,8 @@ export default function App() {
       >
         <Text style={styles.title}>Mini Profile App</Text>
 
-        <ProfileCard onEdit={() => {}} />
+        <ProfileCard />
+        <Favorites />
       </ImageBackground>
     </SafeAreaView>
   );
@@ -22,7 +24,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
   },
   bg: {
     flex: 1,
