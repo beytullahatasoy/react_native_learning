@@ -1,7 +1,10 @@
-import FirstScreen from "./src/screens/FirstScreen";
-import SecondScreen from "./src/screens/SecondScreen";
-import ThirdScreen from "./src/screens/ThirdScreen";
+import { NavigationContainer } from "@react-navigation/native";
+import MainStackNavigator from "./src/nagivation/MainStackNagivator";
 
 export default function App() {
-  return <FirstScreen />;
+  return (
+    <NavigationContainer>
+      <MainStackNavigator />
+    </NavigationContainer>
+  );
 }
