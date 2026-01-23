@@ -16,7 +16,7 @@ const thirdScreen = () => {
       >
         <Text>İkinci Ekrana Git</Text>
         <Text>Ekran: {name}</Text>
-        <Text>Kimden: {params.kimden}</Text>
+        <Text>Kimden: {params?.kimden}</Text>
       </TouchableOpacity>
     </View>
   );
