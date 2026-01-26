@@ -4,6 +4,7 @@ const colors = {
   borderColor: "#1f2937",
   activeColor: "#60a5fa",
   inactiveColor: "#94a3b8",
+  buttonColor: "#2563eb",
 };
 
 export default colors;
