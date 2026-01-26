@@ -3,12 +3,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../themes/colors";
 import { s } from "react-native-size-matters";
 import { useState } from "react";
+import searchMovies from "../api/omdb";
 
 const HomeScreen = () => {
   const [query, setQuery] = useState("Batman");
 
   const onSubmit = () => {
-    console.log("Search submitted:", query);
+    searchMovies(query);
   };
 
   return (

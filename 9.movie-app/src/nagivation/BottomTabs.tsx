@@ -11,7 +11,7 @@ function MyTabs() {
     <Tab.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: colors.backgroundColor },
-        headerTitleStyle: { color: colors.textColor },
+        headerTitleStyle: { color: colors.textColor, fontSize: s(24) },
         headerTintColor: colors.textColor,
         tabBarStyle: {
           backgroundColor: colors.backgroundColor,
@@ -19,11 +19,13 @@ function MyTabs() {
         },
         tabBarActiveTintColor: colors.activeColor,
         tabBarInactiveTintColor: colors.inactiveColor,
+        tabBarLabelStyle: { fontSize: s(10) },
         tabBarIcon: ({ color, size, focused }) => null,
       }}
     >
       <Tab.Screen
         options={{
+          title: "Home",
           tabBarIcon: ({ color }) => (
             <Ionicons name="home" size={s(20)} color={color} />
           ),
@@ -34,6 +36,7 @@ function MyTabs() {
 
       <Tab.Screen
         options={{
+          title: "Categories",
           tabBarIcon: ({ color }) => (
             <Ionicons name="folder-open-sharp" size={s(20)} color={color} />
           ),
@@ -44,6 +47,7 @@ function MyTabs() {
 
       <Tab.Screen
         options={{
+          title: "Saved",
           tabBarIcon: ({ color }) => (
             <Ionicons name="bookmark-sharp" size={s(20)} color={color} />
           ),
