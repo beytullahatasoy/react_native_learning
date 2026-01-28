@@ -3,20 +3,24 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../themes/colors";
 import { s } from "react-native-size-matters";
 import { useState } from "react";
-import searchMovies from "../api/omdb";
+import searchMovies, { OmdbSearchItem } from "../api/omdb";
+import { FlatList } from "react-native";
+import MovieCard from "../components/MovieCard";
 
 const HomeScreen = () => {
   const [query, setQuery] = useState("Batman");
+  const [movies, setMovies] = useState<OmdbSearchItem[]>([]);
 
-  const onSubmit = () => {
-    searchMovies(query);
+  const onSubmit = async () => {
+    // arrow function
+    const results = await searchMovies(query);
+    const incomingMovies = results?.Search || [];
+    setMovies(incomingMovies);
   };
 
   return (
     <SafeAreaView style={styles.container} edges={[]}>
-      {" "}
-      // SafeAreaView'da oluşan boşlukları kaldırmak için edges props'u boş bir
-      dizi olarak ayarlandı
+      {/* SafeAreaView'da oluşan boşlukları kaldırmak için edges props'u boş bırakıldı */}
       <View style={styles.searchContainer}>
         <TextInput
           value={query}
@@ -30,6 +34,11 @@ const HomeScreen = () => {
           <Text style={styles.searchButtonText}>Search</Text>
         </Pressable>
       </View>
+      <FlatList
+        data={movies}
+        renderItem={({ item }) => <MovieCard movie={item} />}
+        keyExtractor={(item, index) => `${item.imdbID}-${index}`}
+      />
     </SafeAreaView>
   );
 };

@@ -1,14 +1,16 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { OmdbSearchItem } from "../api/omdb";
+import { s } from "react-native-size-matters";
 
-const MovieCard = () => {
+const MovieCard = ({ movie }: { movie: OmdbSearchItem }) => {
   return (
     <Pressable style={styles.MovieCard}>
       <View style={styles.movieCardDetails}>
-        <Image style={styles.movieCardImage} />
+        <Image style={styles.movieCardImage} source={{ uri: movie.Poster }} />
         <View style={styles.movieCardTittles}>
-          <Text style={styles.movieTitle}>Movie Title</Text>
-          <Text style={styles.movieYear}>2026</Text>
+          <Text style={styles.movieTitle}>{movie.Title}</Text>
+          <Text style={styles.movieYear}>{movie.Year}</Text>
         </View>
       </View>
     </Pressable>
@@ -18,7 +20,10 @@ const MovieCard = () => {
 export default MovieCard;
 
 const styles = StyleSheet.create({
-  MovieCard: {},
+  MovieCard: {
+    width: "50%",
+    padding: s(8),
+  },
   movieCardDetails: {},
   movieCardImage: {},
   movieCardTittles: {},

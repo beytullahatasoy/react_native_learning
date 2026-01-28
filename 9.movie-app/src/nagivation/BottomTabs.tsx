@@ -19,7 +19,7 @@ function MyTabs() {
         },
         tabBarActiveTintColor: colors.activeColor,
         tabBarInactiveTintColor: colors.inactiveColor,
-        tabBarLabelStyle: { fontSize: s(10) },
+        tabBarLabelStyle: { fontSize: s(15) },
         tabBarIcon: ({ color, size, focused }) => null,
       }}
     >
