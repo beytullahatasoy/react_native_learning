@@ -38,6 +38,8 @@ const HomeScreen = () => {
         data={movies}
         renderItem={({ item }) => <MovieCard movie={item} />}
         keyExtractor={(item, index) => `${item.imdbID}-${index}`}
+        key={`movie= ${movies.length}`}
+        numColumns={2}
       />
     </SafeAreaView>
   );
