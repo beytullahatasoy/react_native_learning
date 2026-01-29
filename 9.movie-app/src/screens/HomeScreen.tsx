@@ -19,13 +19,27 @@ const HomeScreen = () => {
   const [movies, setMovies] = useState<OmdbSearchItem[]>([]);
 
   const [Loader, setLoader] = useState(false);
+  const [error, setError] = useState("");
 
   const onSubmit = async () => {
     // arrow function
     setLoader(true);
-    const results = await searchMovies(query);
-    const incomingMovies = results?.Search || [];
-    setMovies(incomingMovies);
+    setError("");
+
+    try {
+      const results = await searchMovies(query);
+      if (results.Response === "True") {
+        const incomingMovies = results?.Search || [];
+        setMovies(incomingMovies);
+      } else {
+        setMovies([]);
+        setError(results.Error || "No movies found");
+      }
+    } catch {
+      setError("Something went wrong");
+      setMovies([]);
+    }
+
     setLoader(false);
   };
 
@@ -63,6 +77,23 @@ const HomeScreen = () => {
             }}
           >
             Loading..
+          </Text>
+        </View>
+      ) : error ? (
+        <View
+          style={{
+            flex: 1,
+            alignContent: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Text
+            style={{
+              color: colors.textColor,
+              fontSize: s(14),
+            }}
+          >
+            {error}
           </Text>
         </View>
       ) : (
