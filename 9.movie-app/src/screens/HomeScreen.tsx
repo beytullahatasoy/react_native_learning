@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../themes/colors";
-import { s } from "react-native-size-matters";
+import { s, vs } from "react-native-size-matters";
 import { useState } from "react";
 import searchMovies, { OmdbSearchItem } from "../api/omdb";
 import { FlatList } from "react-native";
@@ -47,7 +47,24 @@ const HomeScreen = () => {
       </View>
 
       {Loader ? (
-        <ActivityIndicator />
+        <View
+          style={{
+            flex: 1,
+            alignContent: "center",
+            justifyContent: "center",
+          }}
+        >
+          <ActivityIndicator size={"large"} />
+          <Text
+            style={{
+              color: colors.textColor,
+              marginTop: vs(4),
+              textAlign: "center",
+            }}
+          >
+            Loading..
+          </Text>
+        </View>
       ) : (
         <FlatList
           data={movies}
