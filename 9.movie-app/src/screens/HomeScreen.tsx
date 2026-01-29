@@ -54,6 +54,7 @@ const HomeScreen = () => {
           placeholder="Search (e.g., Batman, Spiderman)"
           placeholderTextColor={colors.inactiveColor}
           returnKeyType="search"
+          onSubmitEditing={onSubmit}
         />
         <Pressable onPress={onSubmit} style={styles.searchButton}>
           <Text style={styles.searchButtonText}>Search</Text>
@@ -83,7 +84,7 @@ const HomeScreen = () => {
         <View
           style={{
             flex: 1,
-            alignContent: "center",
+            alignItems: "center",
             justifyContent: "center",
           }}
         >
