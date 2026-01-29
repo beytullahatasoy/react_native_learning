@@ -1,4 +1,11 @@
-import { Pressable, StyleSheet, TextInput, View, Text } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  ActivityIndicator,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../themes/colors";
 import { s } from "react-native-size-matters";
@@ -11,11 +18,15 @@ const HomeScreen = () => {
   const [query, setQuery] = useState("Batman");
   const [movies, setMovies] = useState<OmdbSearchItem[]>([]);
 
+  const [Loader, setLoader] = useState(false);
+
   const onSubmit = async () => {
     // arrow function
+    setLoader(true);
     const results = await searchMovies(query);
     const incomingMovies = results?.Search || [];
     setMovies(incomingMovies);
+    setLoader(false);
   };
 
   return (
@@ -34,13 +45,18 @@ const HomeScreen = () => {
           <Text style={styles.searchButtonText}>Search</Text>
         </Pressable>
       </View>
-      <FlatList
-        data={movies}
-        renderItem={({ item }) => <MovieCard movie={item} />}
-        keyExtractor={(item, index) => `${item.imdbID}-${index}`}
-        key={`movie= ${movies.length}`}
-        numColumns={2}
-      />
+
+      {Loader ? (
+        <ActivityIndicator />
+      ) : (
+        <FlatList
+          data={movies}
+          renderItem={({ item }) => <MovieCard movie={item} />}
+          keyExtractor={(item, index) => `${item.imdbID}-${index}`}
+          key={`movie= ${movies.length}`}
+          numColumns={2}
+        />
+      )}
     </SafeAreaView>
   );
 };
