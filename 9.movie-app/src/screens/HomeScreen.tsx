@@ -9,7 +9,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../themes/colors";
 import { s, vs } from "react-native-size-matters";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import searchMovies, { OmdbSearchItem } from "../api/omdb";
 import { FlatList } from "react-native";
 import MovieCard from "../components/MovieCard";
@@ -141,5 +141,6 @@ const styles = StyleSheet.create({
   searchButtonText: {
     color: colors.textColor,
     fontWeight: 700,
+    justifyContent: "center",
   },
 });
