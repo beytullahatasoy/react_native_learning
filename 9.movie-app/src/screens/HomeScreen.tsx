@@ -5,6 +5,7 @@ import {
   View,
   Text,
   ActivityIndicator,
+  StatusBar,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../themes/colors";
@@ -20,6 +21,10 @@ const HomeScreen = () => {
 
   const [Loader, setLoader] = useState(false);
   const [error, setError] = useState("");
+
+  const [page, setPage] = useState(1);
+  const [haseMore, setHasMore] = useState(true);
+  const [LoadingMore, setLoadingMore] = useState(false);
 
   const onSubmit = async () => {
     // arrow function
@@ -42,6 +47,11 @@ const HomeScreen = () => {
 
     setLoader(false);
   };
+
+  useEffect(() => {
+    // listeliyor bos gelmiyor
+    onSubmit();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container} edges={[]}>
