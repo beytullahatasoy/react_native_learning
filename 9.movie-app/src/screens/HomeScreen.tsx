@@ -26,7 +26,7 @@ const HomeScreen = () => {
   const [haseMore, setHasMore] = useState(true);
   const [LoadingMore, setLoadingMore] = useState(false);
 
-  const onSubmit = async () => {
+  const fetchMovies = async () => {
     // arrow function
     setLoader(true);
     setError("");
@@ -47,6 +47,8 @@ const HomeScreen = () => {
 
     setLoader(false);
   };
+
+  const onSubmit = async () => {};
 
   useEffect(() => {
     // listeliyor bos gelmiyor
