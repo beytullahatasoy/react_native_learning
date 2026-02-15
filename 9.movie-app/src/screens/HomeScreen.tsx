@@ -48,7 +48,9 @@ const HomeScreen = () => {
     setLoader(false);
   };
 
-  const onSubmit = async () => {};
+  const onSubmit = () => {
+    fetchMovies();
+  };
 
   useEffect(() => {
     // listeliyor bos gelmiyor
