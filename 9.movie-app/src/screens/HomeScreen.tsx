@@ -26,30 +26,51 @@ const HomeScreen = () => {
   const [haseMore, setHasMore] = useState(true);
   const [LoadingMore, setLoadingMore] = useState(false);
 
-  const fetchMovies = async () => {
-    // arrow function
-    setLoader(true);
-    setError("");
-
-    try {
-      const results = await searchMovies(query);
-      if (results.Response === "True") {
-        const incomingMovies = results?.Search || [];
-        setMovies(incomingMovies);
-      } else {
-        setMovies([]);
-        setError(results.Error || "No movies found");
-      }
-    } catch {
-      setError("Something went wrong");
+  const fetchMovies = async (pageNum: number, isNewSearch = false) => {
+    if (query) {
       setMovies([]);
+      setHasMore(false);
+      return;
     }
 
-    setLoader(false);
+    if (isNewSearch) setLoader(true);
+
+    setError("");
+
+    // arrow function
+
+    try {
+      const results = await searchMovies(query, pageNum);
+      if (results.Response === "True") {
+        const incomingMovies = results?.Search || [];
+
+        setHasMore(incomingMovies.length == 10);
+
+        setMovies((prev) => {
+          if (pageNum === 1) {
+            return incomingMovies;
+          }
+          return [...prev, ...incomingMovies];
+        });
+      } else {
+        if (pageNum === 1) {
+          setMovies([]);
+          setError(results.Error || "No movies found");
+        }
+        setHasMore(false);
+      }
+    } catch {
+      if (pageNum === 1) {
+        setMovies([]);
+        setError("Something went wrong");
+      }
+    } finally {
+      if (isNewSearch) setLoader(false);
+    }
   };
 
   const onSubmit = () => {
-    fetchMovies();
+    fetchMovies(1, true);
   };
 
   useEffect(() => {
