@@ -27,7 +27,7 @@ const HomeScreen = () => {
   const [LoadingMore, setLoadingMore] = useState(false);
 
   const fetchMovies = async (pageNum: number, isNewSearch = false) => {
-    if (query) {
+    if (!query) {
       setMovies([]);
       setHasMore(false);
       return;
@@ -70,7 +70,24 @@ const HomeScreen = () => {
   };
 
   const onSubmit = () => {
+    setPage(1);
+    setMovies([]);
+    setHasMore(true);
     fetchMovies(1, true);
+  };
+
+  const LoadMore = async () => {
+    if (!haseMore || Loader || LoadingMore) return;
+    setLoadingMore(true);
+
+    const nextPage = page + 1;
+
+    try {
+      await fetchMovies(nextPage, false);
+      setPage(nextPage);
+    } finally {
+      setLoadingMore(false);
+    }
   };
 
   useEffect(() => {
@@ -137,8 +154,36 @@ const HomeScreen = () => {
           data={movies}
           renderItem={({ item }) => <MovieCard movie={item} />}
           keyExtractor={(item, index) => `${item.imdbID}-${index}`}
-          key={`movie= ${movies.length}`}
           numColumns={2}
+          onEndReached={LoadMore}
+          onEndReachedThreshold={0.3}
+          ListFooterComponent={
+            LoadingMore ? (
+              <View>
+                <ActivityIndicator color={colors.activeColor} />
+              </View>
+            ) : haseMore ? (
+              <Text
+                style={{
+                  textAlign: "center",
+                  padding: s(8),
+                  color: colors.textColor,
+                }}
+              >
+                Keep scrolling to load more movies...
+              </Text>
+            ) : movies.length > 0 ? (
+              <Text
+                style={{
+                  textAlign: "center",
+                  padding: s(8),
+                  color: colors.textColor,
+                }}
+              >
+                You've seen all movies
+              </Text>
+            ) : null
+          }
         />
       )}
     </SafeAreaView>
