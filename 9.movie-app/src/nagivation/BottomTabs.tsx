@@ -3,6 +3,7 @@ import HomeScreen from "../screens/HomeScreen";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { s } from "react-native-size-matters";
 import colors from "../themes/colors";
+import CatagoriesScreen from "../screens/CatagoriesScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -42,7 +43,7 @@ function MyTabs() {
           ),
         }}
         name="CategoriesScreen"
-        component={HomeScreen}
+        component={CatagoriesScreen}
       />
 
       <Tab.Screen
