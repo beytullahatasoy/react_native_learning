@@ -1,10 +1,19 @@
-import { StyleSheet, Text, View, Pressable, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../themes/colors";
 import { s, vs } from "react-native-size-matters";
 import CATEGORIES from "../constants/categories";
 import searchMovies, { OmdbSearchItem } from "../api/omdb";
+import { FlatList } from "react-native-gesture-handler";
+import MovieCard from "../components/MovieCard";
 
 const CatagoriesScreen = () => {
   const [active, setActive] = useState(CATEGORIES[0]);
@@ -24,7 +33,9 @@ const CatagoriesScreen = () => {
     }
   };
 
-  useEffect(() => {}, [active]);
+  useEffect(() => {
+    fetchMovies();
+  }, [active]);
 
   return (
     <SafeAreaView style={styles.container} edges={[]}>
@@ -33,14 +44,30 @@ const CatagoriesScreen = () => {
         contentContainerStyle={{ padding: s(12), gap: s(8) }}
       >
         {CATEGORIES.map((c) => (
-          <Pressable style={styles.categoryItem}>
+          <Pressable key={c.key} style={styles.categoryItem}>
             <Text style={styles.categoryText}>{c.label}</Text>
           </Pressable>
         ))}
       </ScrollView>
-      {error ? (
-        <Text style={{ color: "red", padding: s(12) }}>{error}</Text>
-      ) : null}
+
+      {loading ? (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator color={colors.activeColor} />
+        </View>
+      ) : error ? (
+        <View style={{ padding: s(12) }}>
+          <Text style={{ color: "red" }}>{error}</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={movies}
+          renderItem={({ item }) => <MovieCard movie={item} />}
+          keyExtractor={(item, index) => `${item.imdbID}-${index}`}
+          numColumns={2}
+        />
+      )}
     </SafeAreaView>
   );
 };
