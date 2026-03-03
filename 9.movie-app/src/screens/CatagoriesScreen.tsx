@@ -18,7 +18,7 @@ import MovieCard from "../components/MovieCard";
 const CatagoriesScreen = () => {
   const [active, setActive] = useState(CATEGORIES[0]);
   const [movies, setMovies] = useState<OmdbSearchItem[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   const fetchMovies = async () => {
@@ -34,7 +34,7 @@ const CatagoriesScreen = () => {
   };
 
   useEffect(() => {
-    fetchMovies();
+    // fetchMovies();
   }, [active]);
 
   return (
